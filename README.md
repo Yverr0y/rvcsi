@@ -1,5 +1,7 @@
 # 📡 rvCSI — edge RF sensing runtime
 
+[![rvCSI animated overview: radio signals become validated sensing evidence](docs/assets/rvcsi-hero.svg)](#quickstart-cli)
+
 > **Turn WiFi Channel State Information into validated, typed, confidence-scored RF events — in Rust, from TypeScript, from the CLI.**
 
 [![Rust 1.85+](https://img.shields.io/badge/rust-1.85+-orange.svg)](https://www.rust-lang.org/)
@@ -26,6 +28,8 @@ The architecture is set by **[ADR-095](docs/adr/ADR-095-rvcsi-edge-rf-sensing-pl
 
 ## Crates
 
+![Capture flows through validation, DSP and typed event emission](docs/assets/rvcsi-pipeline.svg)
+
 | Crate | `unsafe`? | What it owns |
 |-------|-----------|--------------|
 | [`rvcsi-core`](crates/rvcsi-core) | no (`forbid`) | The normalized `CsiFrame`/`CsiWindow`/`CsiEvent` schema, `AdapterProfile`, the `CsiSource` plugin trait, id newtypes + `IdGenerator`, `RvcsiError`, the `validate_frame` pipeline + quality scoring. The shared kernel. |
@@ -41,6 +45,12 @@ The architecture is set by **[ADR-095](docs/adr/ADR-095-rvcsi-edge-rf-sensing-pl
 `rvcsi-mcp` (an MCP tool server), `rvcsi-daemon` (live radio capture + WebSocket), `rvcsi-adapter-esp32` (a live ESP32 serial/UDP source), and the legacy nexmon *packed-float* CSI export are tracked as follow-ups on top of these crates.
 
 ---
+
+## RF memory
+
+[![Windows and events become deterministic embeddings for similarity search and baseline drift](docs/assets/rvcsi-memory.svg)](crates/rvcsi-ruvector)
+
+The current RF memory bridge provides deterministic embeddings and in-memory or JSONL storage. The production RuVector binding remains a follow-up. See the [RF memory crate](crates/rvcsi-ruvector) for details.
 
 ## Install
 
