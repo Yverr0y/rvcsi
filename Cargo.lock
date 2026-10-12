@@ -491,7 +491,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-adapter-esp32"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "rvcsi-core",
  "serde",
@@ -501,7 +501,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-adapter-file"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "rvcsi-core",
  "serde",
@@ -512,7 +512,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-adapter-nexmon"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "cc",
  "rvcsi-core",
@@ -521,7 +521,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-cli"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -537,7 +537,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-core"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -546,7 +546,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-dsp"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "rvcsi-core",
  "serde",
@@ -556,7 +556,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-events"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "rvcsi-core",
  "serde",
@@ -566,7 +566,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-node"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "napi",
  "napi-build",
@@ -581,7 +581,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-runtime"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "rvcsi-adapter-esp32",
  "rvcsi-adapter-file",
@@ -597,7 +597,7 @@ dependencies = [
 
 [[package]]
 name = "rvcsi-ruvector"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "rvcsi-core",
  "serde",

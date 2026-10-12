@@ -1,6 +1,6 @@
 # ADR-097: native ESP32 collector source
 
-Status: implemented, physical hardware qualification pending.
+Status: implemented. [ESP32-C6 collector-path hardware verification](../verification/esp32-c6-2026-10-12.md) passed; direct JSON serial and other boards remain unqualified.
 
 ## Contract and decision
 

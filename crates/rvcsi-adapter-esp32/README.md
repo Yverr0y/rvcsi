@@ -10,7 +10,7 @@ No firmware flashing or radio configuration is performed.
 
 `ts_ns` is required and preserved in nanoseconds; the producer owns timestamp epoch and rollover conversion. `iq_hex` contains signed int8 bytes in imaginary/real order. Bandwidth defaults to 20 MHz. RSSI outside -110..0 dBm is treated as unavailable, matching the legacy collector bridge. `first_word_invalid` removes the first four bytes when true. The adapter does not guess chip identity or fixed subcarrier count.
 
-Each line/datagram must be a CSI record: no boot logs, CSV, blank lines or status messages. Maximum encoded record is 32 KiB; maximum raw input is 4096 I/Q pairs. Invalid hex, incomplete pairs, missing fields, invalid channels and invalid bandwidths fail explicitly. Returned frames are Pending; `CaptureRuntime` and the CLI validate before exposure.
+Each line/datagram must be a CSI record: no boot logs, CSV, blank lines or status messages. Maximum encoded record is 32 KiB; maximum raw input is 4096 I/Q pairs. UDP uses a bounded 65,535-byte receive buffer so oversized datagrams are rejected and counted consistently on every platform before JSON parsing. Invalid hex, incomplete pairs, missing fields, invalid channels and invalid bandwidths fail explicitly. Returned frames are Pending; `CaptureRuntime` and the CLI validate before exposure.
 
 ```bash
 # Build from this checkout; registry release is a separate step.
@@ -28,4 +28,6 @@ Use a specific LAN bind address for a remote ESP32; loopback accepts local sende
 
 Live CLI capture requires a positive frame limit. Receive timeout, parse error or validation error fails the capture without publishing the output. Existing output files are never overwritten. The Rust adapter allows continuing after a malformed bounded record; an oversized stream or I/O error closes the source. `stop()` releases the port/socket. File input is streaming and does not load the entire capture.
 
-Hardware qualification remains separate from file, loopback and pseudo-terminal tests. Firmware must emit this JSON contract to use the adapter.
+Hardware qualification remains separate from file, loopback and pseudo-terminal tests. Firmware or a collector must emit this JSON contract to use the adapter.
+
+The [2026-10-12 ESP32-C6 verification](../../docs/verification/esp32-c6-2026-10-12.md) exercised real RuView binary UDP through a bounded collector, then this adapter's JSON UDP and file inputs. It does not qualify direct JSON serial or other firmware/boards. The accompanying script is a hardware acceptance reproducer, not a general firmware protocol adapter.

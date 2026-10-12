@@ -50,3 +50,6 @@ jobs:
         working-directory: crates/rvcsi-node
       - run: npm test
         working-directory: crates/rvcsi-node
+      - name: Verify native addon version
+        run: node -e "require('node:assert/strict').equal(require('./index.js').rvcsiVersion(), require('./package.json').version)"
+        working-directory: crates/rvcsi-node

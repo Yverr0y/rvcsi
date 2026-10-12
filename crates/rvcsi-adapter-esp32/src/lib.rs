@@ -17,6 +17,9 @@ use std::{
 
 /// Maximum encoded record size. Bounds allocations before JSON parsing.
 pub const MAX_RECORD_BYTES: usize = 32768;
+// Receive a whole UDP datagram before applying the record bound. Winsock
+// reports WSAEMSGSIZE instead of returning a truncated oversized datagram.
+const MAX_UDP_DATAGRAM_BYTES: usize = 65535;
 const MAX_SUBCARRIERS: usize = 4096;
 
 #[derive(Deserialize)]
@@ -226,7 +229,7 @@ impl CsiSource for Esp32Adapter {
                 .take((MAX_RECORD_BYTES + 1) as u64)
                 .read_until(b'\n', &mut bytes),
             Input::Udp(s) => {
-                bytes.resize(MAX_RECORD_BYTES + 1, 0);
+                bytes.resize(MAX_UDP_DATAGRAM_BYTES, 0);
                 s.recv(&mut bytes).inspect(|&n| {
                     bytes.truncate(n);
                 })
@@ -372,5 +375,7 @@ mod tests {
             .unwrap();
         assert!(a.next_frame().is_err());
         assert_eq!(a.health().frames_rejected, 1);
+        assert!(!a.health().connected);
+        assert!(a.next_frame().unwrap().is_none());
     }
 }

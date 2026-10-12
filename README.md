@@ -63,10 +63,10 @@ cargo install rvcsi-cli      # installs the `rvcsi` binary
 
 # or a library, in Cargo.toml
 [dependencies]
-rvcsi-core    = "0.3"
-rvcsi-dsp     = "0.3"
-rvcsi-events  = "0.3"
-rvcsi-runtime = "0.3"        # the composition layer most apps want
+rvcsi-core    = "0.4"
+rvcsi-dsp     = "0.4"
+rvcsi-events  = "0.4"
+rvcsi-runtime = "0.4"        # the composition layer most apps want
 ```
 
 ### Node / TypeScript
@@ -128,7 +128,7 @@ cargo build --release -p rvcsi-cli
 ./target/release/rvcsi calibrate --in session.rvcsi --out baseline.json
 ```
 
-Firmware must emit the documented `raw_csi` JSON contract, not arbitrary ESP-IDF CSV. Live capture requires a frame limit; receive timeout defaults to 5 seconds. Failed captures are not published, and existing outputs are never overwritten. UDP is unauthenticated: bind explicitly and restrict senders. See the [adapter guide](crates/rvcsi-adapter-esp32) and [ADR-097](docs/adr/ADR-097-esp32-source-adapter.md). Physical ESP32 qualification remains pending.
+Firmware or a collector must emit the documented `raw_csi` JSON contract, not arbitrary ESP-IDF CSV. Live capture requires a frame limit; receive timeout defaults to 5 seconds. Failed captures are not published, and existing outputs are never overwritten. UDP is unauthenticated: bind explicitly and restrict senders. See the [adapter guide](crates/rvcsi-adapter-esp32) and [ADR-097](docs/adr/ADR-097-esp32-source-adapter.md). A [measured ESP32-C6 verification](docs/verification/esp32-c6-2026-10-12.md) covers real binary UDP through a collector into this adapter; direct JSON serial and other boards remain unqualified.
 
 ---
 
