@@ -369,8 +369,13 @@ mod tests {
             SessionId(1),
         )
         .unwrap();
-        UdpSocket::bind("127.0.0.1:0")
-            .unwrap()
+        let sender = UdpSocket::bind("127.0.0.1:0").unwrap();
+        // Darwin's default UDP send buffer cannot hold this test datagram.
+        // Size this socket explicitly so the adapter's rejection is exercised.
+        socket2::SockRef::from(&sender)
+            .set_send_buffer_size(MAX_UDP_DATAGRAM_BYTES)
+            .unwrap();
+        sender
             .send_to(&vec![b' '; MAX_RECORD_BYTES + 100], a.local_addr().unwrap())
             .unwrap();
         assert!(a.next_frame().is_err());
