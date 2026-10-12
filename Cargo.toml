@@ -5,6 +5,7 @@ members = [
     "crates/rvcsi-dsp",
     "crates/rvcsi-events",
     "crates/rvcsi-adapter-file",
+    "crates/rvcsi-adapter-esp32",
     "crates/rvcsi-adapter-nexmon",
     "crates/rvcsi-ruvector",
     "crates/rvcsi-runtime",

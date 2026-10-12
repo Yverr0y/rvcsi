@@ -11,6 +11,7 @@ categories = ["science"]
 readme = "README.md"
 
 [dependencies]
+rvcsi-adapter-esp32 = { path = "../rvcsi-adapter-esp32", version = "0.3.1" }
 rvcsi-core = { path = "../rvcsi-core", version = "0.3.1" }
 rvcsi-dsp = { path = "../rvcsi-dsp", version = "0.3.1" }
 rvcsi-events = { path = "../rvcsi-events", version = "0.3.1" }
